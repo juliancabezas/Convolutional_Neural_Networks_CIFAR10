@@ -1,7 +1,7 @@
 
 # Assignment 2, Deep Learning Fundamentals, 2020
 
-Julian Cabezas Pena
+Julian Cabezas Pena. 
 Student ID: a1785086
 
 Testing data augmentation techniques and VGG convolutional neural networks for multiclass image classification on the CIFAR-10 dataset, using Pytorch
