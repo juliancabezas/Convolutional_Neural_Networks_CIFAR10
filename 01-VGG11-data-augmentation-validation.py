@@ -120,27 +120,19 @@ class VGG11_CIFAR10(nn.Module):
         # Call super constructor of the class
         super(VGG11_CIFAR10, self).__init__()
 
-        # Convolution blocks
+        # Convolution layer blocks
         self.conv1_1 = nn.Conv2d(in_channels = 3, out_channels = 64, kernel_size = 3, padding = 1)
-        #self.conv1_2 = nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size = 3, padding = 1)
 
         self.conv2_1 = nn.Conv2d(in_channels = 64, out_channels = 128, kernel_size = 3, padding = 1)
-        #self.conv2_2 = nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = 3, padding = 1)
 
         self.conv3_1 = nn.Conv2d(in_channels = 128, out_channels = 256, kernel_size = 3, padding = 1)
         self.conv3_2 = nn.Conv2d(in_channels = 256, out_channels = 256, kernel_size = 3, padding = 1)
-        #self.conv3_3 = nn.Conv2d(in_channels = 256, out_channels = 256, kernel_size = 3, padding = 1)
-        #self.conv3_4 = nn.Conv2d(in_channels = 256, out_channels = 256, kernel_size = 3, padding = 1)
 
         self.conv4_1 = nn.Conv2d(in_channels = 256, out_channels = 512, kernel_size = 3, padding = 1)
         self.conv4_2 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
-        #self.conv4_3 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
-        #self.conv4_4 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
 
         self.conv5_1 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
         self.conv5_2 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
-        #self.conv5_3 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
-        #self.conv5_4 = nn.Conv2d(in_channels = 512, out_channels = 512, kernel_size = 3, padding = 1)
 
         # Pooling layer, to be used between each group of convolution layers
         self.pool = nn.MaxPool2d(kernel_size = 2, stride = 2)
@@ -166,29 +158,21 @@ class VGG11_CIFAR10(nn.Module):
         # Stacks of convolutionnal layers and max pooling
 
         x = F.relu(self.conv1_1(x)) # out: n, 64, 32,  32
-        #x = F.relu(self.conv1_2(x)) # out: n, 64, 32,  32
         x = self.pool(x) # out: n, 64, 16, 16
 
         x = F.relu(self.conv2_1(x)) # out: n, 128, 16,  16
-        #x = F.relu(self.conv2_2(x)) # out: n, 128, 16,  16
         x = self.pool(x) # out: n, 128, 8, 8
 
         x = F.relu(self.conv3_1(x)) # out: n, 256, 8,  8
         x = F.relu(self.conv3_2(x)) # out: n, 256, 8,  8
-        #x = F.relu(self.conv3_3(x)) # out: n, 256, 8,  8
-        #x = F.relu(self.conv3_4(x)) # out: n, 256, 8,  8
         x = self.pool(x) # out: n, 256, 4, 4
 
         x = F.relu(self.conv4_1(x)) # out: n, 512, 4,  4
         x = F.relu(self.conv4_2(x)) # out: n, 512, 4,  4
-        #x = F.relu(self.conv4_3(x)) # out: n, 512, 4,  4
-        #x = F.relu(self.conv4_4(x)) # out: n, 512, 4,  4
         x = self.pool(x) # out: n, 512, 2, 2
 
         x = F.relu(self.conv5_1(x)) # out: n, 512, 2, 2
         x = F.relu(self.conv5_2(x)) # out: n, 512, 2, 2
-        #x = F.relu(self.conv5_3(x)) # out: n, 512, 2, 2
-        #x = F.relu(self.conv5_4(x)) # out: n, 512, 2, 2
         x = self.pool(x) # out: n, 512, 1, 1
 
         # Flatten to get a vector of length 515
