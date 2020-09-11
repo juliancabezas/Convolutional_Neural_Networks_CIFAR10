@@ -8,7 +8,10 @@ Testing data augmentation techniques and VGG convolutional neural networks for m
 
 ## Environment
 
-This repo was tested under a Linux 64 bit OS, using Python 3.7.7
+This repo was tested under a Linux 64 bit OS, using Python 3.7.7, PyTorch 1.6.0 and TorchVision 0.7.0
+
+It was also tested in Google Colab (https://colab.research.google.com/) with GPU enabled
+
 
 ## How to run this repo
 
@@ -35,10 +38,11 @@ conda activate vgg_environment
 
 5. Run each specific file in yout IDE of preference, (I recommend [VS Code](https://code.visualstudio.com/) with the Python extension), using the root folder of the directory as working directory to make the relative paths work.
 
-It is also possible to run the codes using
+It is also possible to run the codes openning a terminal in the project directory
 ```bash
 python <name_of_the_py_file>
 ```
+* Alternatevely, you can use Google Colab (https://colab.research.google.com/) with GPU enabled
 
 Run the codes in order:
 - 00-Figures-images-cifar10.py: Creates the figures with samples of the CIFAR10 dataset and of the applied data augmentation methods (Optional)
@@ -49,4 +53,7 @@ Run the codes in order:
 - 05-VGG19-final-model-test.py: Use the final model on the test dataset, and get the accuracies
 - 06-Graphs-data-augmentation-hyperparameters.py: Graphs of data augmentation validation and learning rate adjusting (Optional)
 
-* Alternatevely, you can use Goole Colab https://colab.research.google.com/ with GPU enabled
+
+
+
+
