@@ -1,0 +1,105 @@
+\begin{thebibliography}{10}\itemsep=-1pt
+
+\bibitem{Aghdam2017}
+Hamed~Habibi Aghdam and Elnaz~Jahani Heravi.
+\newblock {\em {Guide to Convolutional Neural Networks: A Practical Application
+  to Traffic-Sign Detection and Classification}}.
+\newblock 2017.
+
+\bibitem{Bishop2006}
+Christopher~M Bishop.
+\newblock {\em {Pattern Recognition and Machine Learning}}.
+\newblock Springer, New York, NY, USA, 2006.
+
+\bibitem{Hastie2009}
+Trevor Hastie, Robert Tibshirani, and Jerome Friedman.
+\newblock {\em {The Elements of Statistical Learning}}.
+\newblock 2009.
+
+\bibitem{He2015}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock {Delving deep into rectifiers: Surpassing human-level performance on
+  imagenet classification}.
+\newblock In {\em Proceedings of the IEEE International Conference on Computer
+  Vision}, volume 2015 Inter, pages 1026--1034, 2015.
+
+\bibitem{He2016}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock {Deep residual learning for image recognition}.
+\newblock {\em Proceedings of the IEEE Computer Society Conference on Computer
+  Vision and Pattern Recognition}, 2016-Decem:770--778, 2016.
+
+\bibitem{He2016a}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock {Identity mappings in deep residual networks}.
+\newblock {\em Computer Vision – ECCV 2016. ECCV 2016. Lecture Notes in
+  Computer Science,}, 9908:630--645, 2016.
+
+\bibitem{Huang2018}
+Yanping Huang, Youlong Cheng, Ankur Bapna, Orhan Firat, Mia~Xu Chen, Dehao
+  Chen, HyoukJoong Lee, Jiquan Ngiam, Quoc~V. Le, Yonghui Wu, and Zhifeng Chen.
+\newblock {GPipe: Efficient Training of Giant Neural Networks using Pipeline
+  Parallelism}.
+\newblock {\em arXiv e-prints}, page arXiv:1811.06965, 2019.
+
+\bibitem{Kolesnikov2019}
+Alexander Kolesnikov, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung,
+  Sylvain Gelly, and Neil Houlsby.
+\newblock {Big Transfer (BiT): General Visual Representation Learning}.
+\newblock 2019.
+
+\bibitem{Krizhevsky2012}
+Alex Krizhevsky.
+\newblock {Learning Multiple Layers of Features from Tiny Images}.
+\newblock Technical report, University of Toronto, Toronto, Canada, 2012.
+
+\bibitem{Krizhevsky2017}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E. Hinton.
+\newblock {ImageNet classification with deep convolutional neural networks}.
+\newblock {\em Communications of the ACM}, 60(6):84--90, 2017.
+
+\bibitem{Liu2016}
+Shuying Liu and Weihong Deng.
+\newblock {Very deep convolutional neural network based image classification
+  using small training sample size}.
+\newblock {\em Proceedings - 3rd IAPR Asian Conference on Pattern Recognition,
+  ACPR 2015}, pages 730--734, 2016.
+
+\bibitem{Rosenblatt1957}
+F. Rosenblatt.
+\newblock {The Perceptron - A Perceiving and Recognizing Automaton}, 1957.
+
+\bibitem{Sharma2018}
+Neha Sharma, Vibhor Jain, and Anju Mishra.
+\newblock {An Analysis of Convolutional Neural Networks for Image
+  Classification}.
+\newblock {\em Procedia Computer Science}, 132:377--384, 2018.
+
+\bibitem{Shorten2019}
+Connor Shorten and Taghi~M. Khoshgoftaar.
+\newblock {A survey on Image Data Augmentation for Deep Learning}.
+\newblock {\em Journal of Big Data}, 6(1), 2019.
+
+\bibitem{Simonyan2015}
+Karen Simonyan and Andrew Zisserman.
+\newblock {Very deep convolutional networks for large-scale image recognition}.
+\newblock {\em 3rd International Conference on Learning Representations, ICLR
+  2015 - Conference Track Proceedings}, pages 1--14, 2015.
+
+\bibitem{Skansi2018}
+Sandro Skansi.
+\newblock {\em {Introduction to Deep Learning: From Logical Calculus to
+  Artificial Intelligence}}.
+\newblock Springer, Cham, Switzerland, 2018.
+
+\bibitem{Vapnik1995}
+Vladimir~N. Vapnik.
+\newblock {\em {The Nature of Statistical Learning Theory}}.
+\newblock Springer, New York, NY, USA, 1995.
+
+\bibitem{Zhang2019}
+Dengsheng Zhang.
+\newblock {\em {Fundamentals of Image Data Mining}}.
+\newblock 2019.
+
+\end{thebibliography}
