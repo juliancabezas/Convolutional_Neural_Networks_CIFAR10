@@ -26,7 +26,7 @@ from torch.utils.data.sampler import SubsetRandomSampler
 results_folder = "./results_validation/"
 
 # Number of epochs and learning rate
-n_epoch = 5
+n_epoch = 50
 learning_rate = 0.01
 
 # Data augmendation techniques to apply
