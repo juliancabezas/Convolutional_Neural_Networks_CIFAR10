@@ -35,7 +35,7 @@ RANDOM_CROP = True
 RANDOM_HORIZONTAL_FLIP = True
 
 # Name to put in the csv output files
-modelname = "vgg11_prueba"
+modelname = "vgg11"
 
 #----------------------------------------
 
