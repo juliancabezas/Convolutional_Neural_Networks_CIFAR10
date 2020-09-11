@@ -3,7 +3,7 @@
 # Deep Learning Fundamentals
 # University of Adelaide
 # Assingment 2
-# VGG19 implementation on the CIFAR-10 dataset, using random horizontal flip and random crop - Train
+# VGG19 implementation on the CIFAR-10 dataset, using random horizontal flip and random crop - Test
 ####################################
 
 
@@ -19,59 +19,38 @@ import numpy as np
 import pandas as pd
 from torch.utils.data.sampler import SubsetRandomSampler
 
-#---------------------------------------
-# Folder to store the model object
+#------------------------------------
+# Parameters
 model_folder = "./models/"
-
-# Number of epochs
-n_epoch = 100
-
-# Learning rate, picked from the best validation  set accuracy
-learning_rate = 0.01
-
-# Model name (for the .pth file)
 modelname = "vgg19_RC_RH_final"
 
-#------------------------------
+#----------------------------------
 
-# Transforms the data to tensor, apply RH and RC transformations
-transform_train = transforms.Compose(
-    [transforms.RandomHorizontalFlip(),
-     transforms.RandomCrop(32, 4),
-     transforms.ToTensor(),
-     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])])
-
-# In the test data we only apply the normalization
+# We will only use the test data, so no transformation
 transform_val_test = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])])
 
-# Download the training data
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                        download=True, transform=transform_train)
 
 # Download the test data
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True, transform=transform_val_test)
 
-
-
-# Data loader of the train and test dataset
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=10,
-                                          num_workers=4, generator=torch.Generator().manual_seed(58))
-
+# Set the test loader
 testloader = torch.utils.data.DataLoader(testset, batch_size=10,
                                          num_workers=4)
 
-# Classes in a tuple structure
+# Get a tuple with the classes
 classes = ('airplane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
 
 # Set cuda as device if available
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
 
-# Class of the VGG19 neural network, it has to inherit from nn.Module
+
+# Class of the VGG11 neural network, it has to inherit from nn.Module
 class VGG19_CIFAR10(nn.Module):
     def __init__(self):
         # Call super constructor of the class
@@ -166,71 +145,39 @@ torch.cuda.manual_seed(45)
 net = VGG19_CIFAR10().to(device)
 
 
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=0.01)
-
-# Train with the dataset multiple times (n epoch)
-for epoch in range(1,n_epoch+1):  
-
-    print("Epoch:",epoch)
-
-    # Initializing the training variables
-    running_loss_full = 0.0
-    correct_total_train = 0
-    correct_total_val = 0
-    nbatch = 0
-    nsamples_train = 0
-    nsamples_val = 0
-
-    # Go though all the training data
-    for i, data in enumerate(trainloader, 0):
-        print(i, end='\r')
-
-        # Get the inputs (images) and labels (target variable)
-        inputs, labels = data
-        # Put them in the graphics card
-        inputs = inputs.to(device)
-        labels = labels.to(device)
-
-        # Set the gradients to zero
-        optimizer.zero_grad()
-
-        # Forward pass
-        outputs = net(inputs)
-
-        # Calculate the  gradients (backward)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        # Backpropagation
-        optimizer.step()
-
-        # Measure the loss
-        running_loss_full += loss.item() 
-        nbatch = nbatch + 1
-
-
-    # Get the accuracy in the training data
-    with torch.no_grad():
-        for data in trainloader:
-            images_train, labels_train = data
-            images_train = images_train.to(device)
-            labels_train = labels_train.to(device)
-            # Get the output and see how they match with the true labels
-            outputs_train = net(images_train)
-            _, predicted_train = torch.max(outputs_train, 1)
-            correct_train = (predicted_train == labels_train).float().sum()
-            correct_total_train = correct_total_train + correct_train.item()
-            nsamples_train = nsamples_train + len(labels_train)  
-
-    train_accuracy = 100.0 * correct_total_train / nsamples_train
-    print("Train Accuracy:", train_accuracy)
-    print("Loss:", running_loss_full / nbatch)
-
-
-print('Finished Training')
-
-# Specify a path
+# Specify the mpth of the trained model
 PATH = model_folder + modelname + '.pth'
 
-# Save the model
-torch.save(net.state_dict(), PATH)
+# Load model
+net.load_state_dict(torch.load(PATH))
+net.eval()
+
+# Not we are going to print the accuracy for each of the models
+# (Sorry this code is very similar to the workshop)
+correct_total_test = 0
+class_correct = list(0. for i in range(10))
+class_total = list(0. for i in range(10))
+
+# Make sure of using no_grad to leave the weigths as they are
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        images = images.to(device)
+        labels = labels.to(device)
+        outputs = net(images)
+        # Get the predicted values for the batch and see how many are correct
+        _, predicted = torch.max(outputs, 1)
+        correct_test = (predicted == labels).float().sum()
+        correct_total_test = correct_total_test + correct_test.item()
+        c = (predicted == labels).squeeze()
+        # Get the correct items class by class
+        for i in range(10):
+            label = labels[i]
+            class_correct[label] += c[i].item()
+            class_total[label] += 1
+
+# Print the per class results and the final results
+for i in range(10):
+    print("Accuracy of " + classes[i] + ": " + "{:.2%}".format(class_correct[i] / class_total[i]))
+
+print("Overall test Accuracy: "+"{:.2%}".format(correct_total_test/10000))

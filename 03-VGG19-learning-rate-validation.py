@@ -3,7 +3,7 @@
 # Deep Learning Fundamentals
 # University of Adelaide
 # Assingment 2
-# VGG19 implementation on the CIFAR-10 dataset, using different data augmentation techniques
+# VGG19 implementation on the CIFAR-10 dataset, using different learning rates
 ####################################
 
 # Importing the necessary libraries
@@ -23,48 +23,24 @@ from torch.utils.data.sampler import SubsetRandomSampler
 #----------------------------------------
 # PARAMETERS
 # Folder to put the outputs of the trainings
-results_folder = "./results_validation/"
+results_folder = "./results_validation_lr/"
 
-# Number of epochs and learning rate
-n_epoch = 50
+# Number of epochs and learning rate, adjust the learning rate to get different results
+n_epoch = 100
 learning_rate = 0.01
 
-# Data augmendation techniques to apply
-COLOR_JITTER = True
-RANDOM_CROP = True
-RANDOM_HORIZONTAL_FLIP = True
-
 # Name to put in the csv output files
-modelname = "vgg19"
+modelname = "vgg19_RC_RH"
 
 #----------------------------------------
 
-# Depending on the chosen data augmentation methods I will build the name of the model
-if COLOR_JITTER:
-    modelname = modelname + '_CJ'
-if RANDOM_CROP :
-    modelname = modelname + '_RC'
-if RANDOM_HORIZONTAL_FLIP:
-    modelname = modelname + '_RH'
+# Transforms the data to tensor, apply RH and RC transformations
+transform_train = transforms.Compose(
+    [transforms.RandomHorizontalFlip(),
+     transforms.RandomCrop(32, 4),
+     transforms.ToTensor(),
+     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])])
 
-
-# Generate the set of transformations
-transformations_selected = []
-
-# Include the corresponding transformation if the parameter is set to TRUE
-if COLOR_JITTER:
-    transformations_selected.append(transforms.ColorJitter(0.5,0.5,0.5))
-if RANDOM_CROP :
-    transformations_selected.append(transforms.RandomCrop(32, padding = 4))
-if RANDOM_HORIZONTAL_FLIP:
-    transformations_selected.append(transforms.RandomHorizontalFlip())
-
-# The noramlization to let the data be between -1 and +1 is always applied
-transformations_selected.append(transforms.ToTensor())
-transformations_selected.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
-
-# Set the training data augmentations
-transform_train = transforms.Compose(transformations_selected)
 
 # In the case of the validation and test datasets, the only data augmentation that is applied is the normalization
 transform_val_test = transforms.Compose(
@@ -303,6 +279,6 @@ print('Finished Training')
 # Create pandas dataset and store the results in a csv
 dic = {'epoch':epoch_full,'train_accuracy':acc_full,'val_accuracy':acc_full_val,'loss':loss_full}
 df_grid_search = pd.DataFrame(dic)
-df_grid_search.to_csv(results_folder + modelname + '.csv')
+df_grid_search.to_csv(results_folder + modelname + '_' + str(learning_rate).replace(".", "_") + '.csv')
 
 

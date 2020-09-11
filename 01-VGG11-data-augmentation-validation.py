@@ -6,7 +6,7 @@
 # VGG11 implementation on the CIFAR-10 dataset, using different data augmentation techniques
 ####################################
 
-# Importing the pytorch models
+# Importing the necessary libraries
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -203,11 +203,11 @@ acc_full_val = []
 loss_full = []
 
 # Training of the neural network
-for epoch in range(1,n_epoch+1):  # loop over the dataset multiple times
+for epoch in range(1,n_epoch+1): 
 
     print("Epoch:",epoch)
 
-    # Initializing the trainign variables
+    # Initializing the training variables
     running_loss_full = 0.0
     correct_total_train = 0
     correct_total_val = 0
@@ -225,7 +225,7 @@ for epoch in range(1,n_epoch+1):  # loop over the dataset multiple times
         inputs = inputs.to(device)
         labels = labels.to(device)
 
-        # Set the parameters to zero
+        # Set the gradients to zero
         optimizer.zero_grad()
 
         # Forward pass
